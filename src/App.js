@@ -5,14 +5,14 @@ import Home from "./modules/Home/Home";
 
 const App = () => {
   return (
-    <div className="App">
-      <header className="App-header"></header>
+    <main className="mainApp">
+      <div className="mainBackground"></div>
       <Routes>
         <Route index element={<Splash />} />
         <Route path="start" element={<Start />} />
         <Route path="home" element={<Home />} />
       </Routes>
-    </div>
+    </main>
   );
 };
 
