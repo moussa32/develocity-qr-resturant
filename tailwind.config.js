@@ -12,6 +12,7 @@ module.exports = {
     extend: {
       fontSize: {
         "3xl": "2rem",
+        "2xl": ["1.5rem", { lineHeight: "2.25rem" }],
       },
       fontFamily: {
         sans: ["Poppins", "sans-serif"],
