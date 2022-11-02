@@ -1,17 +1,32 @@
+import { Link, useLocation } from "react-router-dom";
 import { ReactComponent as BurgerIcon } from "../../assets/images/BurgerIcon.svg";
-import { ReactComponent as CartIcon } from "../../assets/images/CartIcon.svg";
+import { ReactComponent as BackArrowIcon } from "../../assets/images/BackArrowIcon.svg";
+import MiniCart from "./MiniCart";
 
 const Navbar = () => {
+  const location = useLocation();
+
+  const handleShowLogo = () => {
+    if (location.pathname.includes("home")) {
+      return (
+        <>
+          <BurgerIcon width={32} height={32} />
+          <span className="text-2xl text-white font-semibold ml-4">Menu</span>
+        </>
+      );
+    } else {
+      return (
+        <Link to="/home">
+          <BackArrowIcon width={20} height={20} />
+        </Link>
+      );
+    }
+  };
+
   return (
     <header className="flex flex-row items-center px-4 pt-8 px-4">
-      <BurgerIcon width={32} height={32} />
-      <span className="text-2xl text-white font-semibold ml-4">Menu</span>
-      <div className="flex flex-row items-center ml-auto relative">
-        <span className="text-white bg-primary py-0.5 px-1.5 top-[-9px] left-[-6px] rounded-full absolute text-xs">
-          3
-        </span>
-        <CartIcon width={24} height={24} />
-      </div>
+      {handleShowLogo()}
+      <MiniCart />
     </header>
   );
 };
