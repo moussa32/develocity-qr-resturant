@@ -24,7 +24,7 @@ const Navbar = () => {
   };
 
   return (
-    <header className="flex flex-row items-center px-4 pt-8 px-4">
+    <header className="flex flex-row items-center px-4 pt-8 px-4 md:container md:mx-auto">
       {handleShowLogo()}
       <MiniCart />
     </header>

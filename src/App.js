@@ -6,15 +6,17 @@ import FoodDetails from "./modules/FoodDetails/FoodDetails";
 
 const App = () => {
   return (
-    <main className="mainApp">
+    <>
       <div className="mainBackground"></div>
-      <Routes>
-        <Route index element={<Splash />} />
-        <Route path="start" element={<Start />} />
-        <Route path="home" element={<Home />} />
-        <Route path=":foodId" element={<FoodDetails />} />
-      </Routes>
-    </main>
+      <main className="mainApp">
+        <Routes>
+          <Route index element={<Splash />} />
+          <Route path="start" element={<Start />} />
+          <Route path="home" element={<Home />} />
+          <Route path=":foodId" element={<FoodDetails />} />
+        </Routes>
+      </main>
+    </>
   );
 };
 
