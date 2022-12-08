@@ -7,6 +7,7 @@ const Scan = () => {
     <>
       <QrReader
         onResult={(result, error) => {
+          alert(result, error);
           if (!!result) {
             setTableNumber(result?.text);
           }
