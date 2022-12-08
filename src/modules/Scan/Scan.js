@@ -23,6 +23,8 @@ const Scan = () => {
             if (!!error) {
             }
           }}
+          key="environment"
+          constraints={{ facingMode: "environment" }}
           scanDelay={5000}
           className="h-36"
         />
