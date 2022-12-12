@@ -4,6 +4,7 @@ import Start from "./modules/Start/Start";
 import Scan from "./modules/Scan/Scan";
 import Home from "./modules/Home/Home";
 import FoodDetails from "./modules/FoodDetails/FoodDetails";
+import OrderSuccess from "./modules/OrderSuccess/OrderSuccess";
 
 const App = () => {
   return (
@@ -15,6 +16,7 @@ const App = () => {
           <Route path="scan" element={<Scan />} />
           <Route path="start" element={<Start />} />
           <Route path="home" element={<Home />} />
+          <Route path="success" element={<OrderSuccess />} />
           <Route path=":foodId" element={<FoodDetails />} />
         </Routes>
       </main>
