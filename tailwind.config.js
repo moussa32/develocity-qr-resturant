@@ -7,6 +7,7 @@ module.exports = {
         white: "#fff",
         primary: "#EB9100",
         secondary: "#C4C4C4",
+        secondaryText: "#A9A9A9",
         semiwhite: "#F0F0F0",
         semidark: "#252733",
         dark: "#232122",
@@ -19,11 +20,13 @@ module.exports = {
         sans: ["Poppins", "sans-serif"],
       },
       borderRadius: {
+        DEFAULT: "5px",
         lg: "0.625rem",
         full: "50%",
         "4xl": "1.875rem",
       },
       borderWidth: {
+        1: "1px",
         3: "3px",
       },
       scale: {
