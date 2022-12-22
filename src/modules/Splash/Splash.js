@@ -1,6 +1,18 @@
+import { useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import { ReactComponent as BurgerIcon } from "../../assets/images/BurgerIcon.svg";
 
 const Splash = () => {
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    const nextStep = setTimeout(() => {
+      navigate("/start");
+    }, 1400);
+
+    return () => clearTimeout(nextStep);
+  }, []);
+
   return (
     <div className="h-screen flex flex-col pt-[295px] items-center font-normal capitalize md:container">
       <BurgerIcon width="115" height="115" />
