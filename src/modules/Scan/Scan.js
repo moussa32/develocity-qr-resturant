@@ -1,13 +1,15 @@
 import { useState } from "react";
 import { QrReader } from "react-qr-reader";
+import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
+import { setTable } from "../../redux/features/tableSlice";
 
 const RANDOM_TABLE_NUMBER = Math.floor(Math.random() * 100);
 
 const Scan = () => {
-  const [tableNumber, setTableNumber] = useState("Didn't read the table number yet");
   const [status, setStatus] = useState(null);
-  let navigate = useNavigate();
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
 
   return (
     <>
@@ -15,8 +17,8 @@ const Scan = () => {
         <QrReader
           onResult={(result, error) => {
             if (!!result) {
+              dispatch(setTable(RANDOM_TABLE_NUMBER));
               setStatus({ type: "success", message: `Your table is ${RANDOM_TABLE_NUMBER}` });
-              setTableNumber(RANDOM_TABLE_NUMBER);
               setTimeout(() => navigate("/start"), 3000);
             }
 
