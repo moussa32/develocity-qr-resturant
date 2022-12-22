@@ -7,7 +7,7 @@ const Splash = () => {
 
   useEffect(() => {
     const nextStep = setTimeout(() => {
-      navigate("/start");
+      navigate("/scan");
     }, 1400);
 
     return () => clearTimeout(nextStep);
