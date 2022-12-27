@@ -1,17 +1,12 @@
 import { useEffect, useRef, useState } from "react";
 import { globalInstance } from "../../api/constant";
 import { InView, useInView } from "react-intersection-observer";
-import mockData2 from "../../assets/images/mock-data-2.png";
-import mockData1 from "../../assets/images/mock-data-1.png";
-import pizza1 from "../../assets/images/pizza-mock-data-1.png";
-import pizza2 from "../../assets/images/pizza-mock-data-2.png";
-import pizza3 from "../../assets/images/pizza-mock-data-3.png";
-import pizza4 from "../../assets/images/pizza-mock-data-4.png";
 import Navbar from "../../shared/components/Navbar";
 import FoodCard from "./FoodCard";
 import FeaturedCard from "./FeaturedCard";
 import Categories from "./Categories";
 import calculateElementTopOffset from "../../shared/utils/calculateElementTopOffset";
+import { Link } from "react-router-dom";
 
 const Home = () => {
   const [selectedCategory, setSelectedCategory] = useState(null);
@@ -105,16 +100,16 @@ const Home = () => {
               threshold={0.15}
               className="grid grid-cols-2 gap-4 px-4 sm:grid-cols-3 pb-6"
             >
-              <FoodCard image={mockData2} title="Grilled beef burger" summary="onion with cheese" price="24.5" />
-              <FoodCard image={mockData1} title="chicken burger" summary="onion with cheese" price="24.5" />
-              <FoodCard image={mockData2} title="Grilled beef burger" summary="onion with cheese" price="24.5" />
-              <FoodCard image={mockData1} title="chicken burger" summary="onion with cheese" price="24.5" />
-              <FoodCard image={mockData2} title="Grilled beef burger" summary="onion with cheese" price="24.5" />
-              <FoodCard image={mockData1} title="chicken burger" summary="onion with cheese" price="24.5" />
-              <FoodCard image={pizza1} title="chicken burger" summary="onion with cheese" price="24.5" />
-              <FoodCard image={pizza2} title="chicken burger" summary="onion with cheese" price="24.5" />
-              <FoodCard image={pizza3} title="chicken burger" summary="onion with cheese" price="24.5" />
-              <FoodCard image={pizza4} title="chicken burger" summary="onion with cheese" price="24.5" />
+              {products.map(productInfo => (
+                <Link to={`/${productInfo.id}`} key={`${productInfo.id}${productInfo.name}`}>
+                  <FoodCard
+                    image={productInfo.image}
+                    title={productInfo.name}
+                    summary={productInfo.brief_desc}
+                    price={productInfo.price}
+                  />
+                </Link>
+              ))}
             </InView>
           </section>
         ))}
