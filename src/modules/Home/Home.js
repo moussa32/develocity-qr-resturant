@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from "react";
+import { Fragment, useEffect, useRef, useState } from "react";
 import { globalInstance } from "../../api/constant";
 import { InView, useInView } from "react-intersection-observer";
 import Navbar from "../../shared/components/Navbar";
@@ -26,7 +26,7 @@ const Home = () => {
 
     globalInstance
       .get("/home", { signal })
-      .then(response => {
+      .then((response) => {
         const { data } = response.data;
         const transformedCategories = data.categories.map(({ id, name }) => ({
           id,
@@ -36,7 +36,7 @@ const Home = () => {
         setCategories(transformedCategories);
         setData(data);
       })
-      .catch(error => console.log(error.messsage));
+      .catch((error) => console.log(error.messsage));
 
     return () => controller.abort();
   }, []);
@@ -50,7 +50,8 @@ const Home = () => {
 
   useEffect(() => {
     const selectedCategoryIndex = selectedCategory - 1;
-    const selectedCategorySection = categoriesSections.current[selectedCategoryIndex];
+    const selectedCategorySection =
+      categoriesSections.current[selectedCategoryIndex];
     ref(selectedCategorySection);
 
     if (selectedCategory) {
@@ -72,7 +73,7 @@ const Home = () => {
     }
   };
 
-  const handleSelectCategory = categoryId => {
+  const handleSelectCategory = (categoryId) => {
     setSelectedCategory(categoryId);
   };
 
@@ -82,36 +83,49 @@ const Home = () => {
       <section className="flex flex-row gap-3 px-4 mt-4 overflow-x-scroll pb-4">
         <FeaturedCard />
       </section>
-      {isLoaded && <Categories categories={categories} active={activeCategory} onSelect={handleSelectCategory} />}
+      {isLoaded && (
+        <Categories
+          categories={categories}
+          active={activeCategory}
+          onSelect={handleSelectCategory}
+        />
+      )}
       {isLoaded &&
         data.categories.map(({ id, name, products }) => (
-          <section
-            key={`${name}${id}`}
-            name={name}
-            ref={categorySection =>
-              !categoriesSections.current.includes(categorySection) && categoriesSections.current.push(categorySection)
-            }
-          >
-            <h2 className="text-white text-3xl text-center my-4">{name}</h2>
-            <InView
-              as="section"
-              onChange={inView => handleInViewSection(inView, id)}
-              skip={disableObserver}
-              threshold={0.15}
-              className="grid grid-cols-2 gap-4 px-4 sm:grid-cols-3 pb-6"
-            >
-              {products.map(productInfo => (
-                <Link to={`/${productInfo.id}`} key={`${productInfo.id}${productInfo.name}`}>
-                  <FoodCard
-                    image={productInfo.image}
-                    title={productInfo.name}
-                    summary={productInfo.brief_desc}
-                    price={productInfo.price}
-                  />
-                </Link>
-              ))}
-            </InView>
-          </section>
+          <Fragment key={`${name}${id}`}>
+            {products.length > 0 && (
+              <section
+                name={name}
+                ref={(categorySection) =>
+                  !categoriesSections.current.includes(categorySection) &&
+                  categoriesSections.current.push(categorySection)
+                }
+              >
+                <h2 className="text-white text-3xl text-center my-4">{name}</h2>
+                <InView
+                  as="section"
+                  onChange={(inView) => handleInViewSection(inView, id)}
+                  skip={disableObserver}
+                  threshold={0.15}
+                  className="grid grid-cols-2 gap-4 px-4 sm:grid-cols-3 pb-6"
+                >
+                  {products.map((productInfo) => (
+                    <Link
+                      to={`/${productInfo.id}`}
+                      key={`${productInfo.id}${productInfo.name}`}
+                    >
+                      <FoodCard
+                        image={productInfo.image}
+                        title={productInfo.name}
+                        summary={productInfo.brief_desc}
+                        price={productInfo.price}
+                      />
+                    </Link>
+                  ))}
+                </InView>
+              </section>
+            )}
+          </Fragment>
         ))}
     </>
   );
